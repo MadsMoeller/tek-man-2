@@ -12,8 +12,8 @@ public class JdbcConnection {
     private Connection connection;
 
     public JdbcConnection(){
-        System.out.println("Establishing database connection");
-        connect();
+        //System.out.println("Establishing database connection");
+        //connect();
     }
 
     public Connection getConnection() {

@@ -3,6 +3,8 @@ package kea.tek.tekman2.serverToServerHandling;
 import kea.tek.tekman2.models.ForeignUser;
 import kea.tek.tekman2.models.Request;
 import kea.tek.tekman2.models.User;
+import kea.tek.tekman2.responseHandling.IncomingResponseHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -18,9 +20,9 @@ import reactor.core.publisher.Mono;
 public class SendRequest {
     final String API_GREETING_POST = "http://localhost:9091/friendship";
     final String SOURCE_HOST = "myHost";
-    private User sourceUser = new User("local@email.mm");
-    private User destiantionUser = new ForeignUser("foreign@email.nn", "foreign-server");
-    //private Request requestToSend = new Request("Diggydiggy", sourceUser, destiantionUser);
+
+    @Autowired
+    IncomingResponseHandler responseHandler;
 
     @PostMapping("/sendGreetingPost")
     public String sendGreeting(@RequestBody Request requestToSend){
@@ -46,6 +48,9 @@ public class SendRequest {
                 .bodyToMono(String.class)
                 .block();
 
+        System.out.println("\nResponse: " + response + "\n");
+        responseHandler.unpackIncomingResponse(response, requestToSend);
+        System.out.println("\n\n");
         return response;
     }
 }
