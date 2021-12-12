@@ -17,8 +17,7 @@ public class IncomingRequestHandler {
             Scanner requestReader = new Scanner(request);
             incomingRequest.setRequestType(requestReader.next());
             incomingRequest.setSource(new ForeignUser(requestReader.next(), requestReader.next()));
-            incomingRequest.setDestination(new User(requestReader.next()));
-            String destinationHost = requestReader.next();
+            incomingRequest.setDestination(new ForeignUser(requestReader.next(), requestReader.next()));
             String version = requestReader.next();
         }catch (Exception e){
             response = "1 500 Error, command";

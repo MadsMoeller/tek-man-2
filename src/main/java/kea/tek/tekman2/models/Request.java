@@ -4,18 +4,18 @@ public class Request {
     private int id;
     private String requestType;
     private User source;
-    private User destination;
+    private ForeignUser destination;
 
     public Request() {
     }
 
-    public Request(String requestType, User source, User destination) {
+    public Request(String requestType, User source, ForeignUser destination) {
         this.requestType = requestType;
         this.source = source;
         this.destination = destination;
     }
 
-    public Request(int id, String requestType, User source, User destination) {
+    public Request(int id, String requestType, User source, ForeignUser destination) {
         this.id = id;
         this.requestType = requestType;
         this.source = source;
@@ -50,7 +50,7 @@ public class Request {
         return destination;
     }
 
-    public void setDestination(User destination) {
+    public void setDestination(ForeignUser destination) {
         this.destination = destination;
     }
 }

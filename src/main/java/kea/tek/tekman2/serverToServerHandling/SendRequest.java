@@ -20,10 +20,10 @@ public class SendRequest {
     final String SOURCE_HOST = "myHost";
     private User sourceUser = new User("local@email.mm");
     private User destiantionUser = new ForeignUser("foreign@email.nn", "foreign-server");
-    private Request requestToSend = new Request("Diggydiggy", sourceUser, destiantionUser);
+    //private Request requestToSend = new Request("Diggydiggy", sourceUser, destiantionUser);
 
     @PostMapping("/sendGreetingPost")
-    public String sendGreeting(@RequestBody String requestMethod){
+    public String sendGreeting(@RequestBody Request requestToSend){
         WebClient webClient = WebClient.builder()
                 .baseUrl(API_GREETING_POST)
                 .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
@@ -31,7 +31,7 @@ public class SendRequest {
 
         // method srcEmail srcHost dstEmail dstHost ver
         String request =
-                "\"" + requestMethod
+                "\"" + requestToSend.getRequestType()
                 + " " + requestToSend.getSource().getEmail()
                 + " " + SOURCE_HOST
                 + " " + requestToSend.getDestination().getEmail()
