@@ -48,7 +48,13 @@ public class IncomingRequestHandler {
     }
 
     public String handleAddRequest(Request request){
-        String response = "Handling 'Add' request";
+        String response;
+
+        if (request.getDestination().getEmail().equals("foreign@email.nn")){
+            response = "1 200 Success";
+        } else{
+            response = "1 501 Error, parameters User not found";
+        }
 
         //First: find destination user
         //else: return "user not found"
